@@ -9,7 +9,7 @@ conda activate pure_diffusion
 python -m pip install torch
 ```
 
-## 2. Quick start
+## 2. Tutorial
 Pure-Diffusion provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
 ### 2.1 Pipelines
 The script `utils.pipeline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`. <br />
