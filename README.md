@@ -1,4 +1,4 @@
-# Pure-Diffusion
+# PureDiffusion
 A torch implementation for [DDPM](https://github.com/hojonathanho/diffusion) with [DDIM](https://github.com/ermongroup/ddim) sampling. This implementation is not restricted for Image data.
 
 ## 1. Installation
