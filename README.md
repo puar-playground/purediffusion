@@ -11,10 +11,19 @@ python -m pip install torch
 
 ## 2. Quick start
 Pure-Diffusion provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
-### utils.pipeline
-
-
-
+### 2.1 utils.pipeline
+The script `utils.pipeline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`. <br />
+A DDPMPipline instance will prepare all parameters ($\alpha$, $\beta$, $\bar{\alpha}$) in a specified noisy schedule. To initialize a DDPMPipline:
+```
+from utils.pipline import DDPMPipline
+ddpm_pipeline = DDPMPipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
+```
+The Now, you can use the instance to sample timesteps and add noise to clean data during training. <br />
+Note that a pipline instance is model independent. Meaning: you need to feed model and data dimension to it for generation. For example:
+```
+ddpm_pipeline.ddpm_reverse(model, batch_size, data_shape)
+```
+The `data_shape` flag is a list of integers represents the dimensionality of a single output of the model. e.g., for a $32 \times 32$ image generation model, a possible setting could be `data_shape=[32, 32, 3]`.
 
 
 
