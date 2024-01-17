@@ -24,7 +24,7 @@ Note that a pipline instance is model independent. Meaning: you need to feed mod
 ```
 ddpm_pipeline.ddpm_reverse(model, batch_size, data_shape)
 ```
-The `data_shape` flag is a list of integers represents the dimensionality of a single output of the model. e.g., for a $32$ x $32$ RGB image generation model, a possible setting could be `data_shape=[32, 32, 3]`.<br />
+The `data_shape` flag is a list of integers represents the dimension of a single output of the model. e.g., for a $32$ x $32$ RGB image generation model, a possible setting could be `data_shape=[32, 32, 3]`.<br />
 
 #### 2.1.2 DDIM
 A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling using specified number of steps: 
@@ -37,6 +37,10 @@ ddim_pipeline.ddim_reverse(model, batch_size, data_shape)
 ```
 
 ### 2.2 Model
+The neural network instance should take two inputs: 1. scalar integer timesteps 2. noisy data tensor.
+In side the model, integer timesteps should be conerted to time embeddings. The model's output should be of the same shape (dimension) of the noisy data tensor.
+
+
 
 
 
