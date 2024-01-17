@@ -2,7 +2,7 @@
 A torch implementation for DDPM with DDIM sampling. The code is not restricted for Image data.
 
 ## 1. Installation
-Pure-Diffusion only rely on [`PyTorch`](https://pytorch.org).
+Pure-Diffusion only requires the [`PyTorch`](https://pytorch.org) package.
 ```
 conda create --name pure_diffusion python=3.9
 conda activate pure_diffusion
