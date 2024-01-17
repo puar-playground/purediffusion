@@ -5,7 +5,7 @@ setup(
     version='0.1.0',
     description='A torch implementation for DDPM with DDIM sampling.',
     url='https://github.com/puar-playground/purediffusion',
-    author='jian chen',
+    author='Jian Chen',
     author_email='cjvault1223@gmail.com',
     license='MIT',
     packages=['purediffusion'],
