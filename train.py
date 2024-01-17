@@ -1,7 +1,6 @@
 import torch
 import torch.nn.functional as F
-from diffusers import DDPMScheduler
-from diffusers.optimization import get_cosine_schedule_with_warmup
+from utils.optimization import get_cosine_schedule_with_warmup
 from utils.dataset import syth_data
 import torch.utils.data as data
 from utils.model import LinearDiffusion
