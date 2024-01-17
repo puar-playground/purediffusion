@@ -29,6 +29,10 @@ A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for effic
 ```
 ddim_pipeline = DDIMPipline(ddpm_pipeline, ddim_num_steps=100)
 ```
+To generate data:
+```
+ddim_pipeline.ddim_reverse(model, batch_size, data_shape)
+```
 
 ### 2.2 Model
 
