@@ -35,8 +35,8 @@ ddim_pipeline.ddim_reverse(model, batch_size, data_shape)
 ```
 
 ### 2.2 Model
-The neural network instance should take two inputs: 1. scalar integer timesteps 2. noisy data tensor.
-Integer timesteps should be conerted to time embeddings. The model's output should be of the same shape (dimension) of the noisy data tensor.
+The neural network instance should take two inputs: 1. scalar integer timesteps 2. noisy data tensor.<br />
+Integer timesteps should be converted to time embeddings. The model's output should be of the same shape (dimension) of the noisy data tensor.
 In the demo, a linear model is provided to demostrate the usage.
 
 
