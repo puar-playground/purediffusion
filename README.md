@@ -1,5 +1,5 @@
 # Pure-Diffusion
-A torch implementation for DDPM with DDIM sampling. The code is not restricted for Image data.
+A torch implementation for DDPM with DDIM sampling. This implementation is not restricted for Image data.
 
 ## 1. Installation
 Pure-Diffusion only requires the [`PyTorch`](https://pytorch.org) package.
