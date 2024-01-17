@@ -14,7 +14,7 @@ Pure-Diffusion provide a simple way to train a diffusion model using customized 
 ### 2.1 Pipelines
 The script `utils.pipeline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`.
 #### 2.1.1 DDPM
-A DDPMPipline instance will prepare all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
+A DDPMPipline instance prepares all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
 ```
 from utils.pipline import DDPMPipline
 ddpm_pipeline = DDPMPipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
