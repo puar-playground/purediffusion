@@ -10,7 +10,7 @@ pip install purediffusion
 ## 2. Tutorial
 `purediffusion` provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
 ### 2.1 Pipelines
-The script `purediffusion.pipeline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`.
+The script `purediffusion.pipeline` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`.
 #### 2.1.1 DDPM
 A DDPMPipline instance prepares all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
 ```
