@@ -41,7 +41,7 @@ The model could take as much input as desired for various conditions. However, i
 2. Noisy data tensor, $D$. The model's output should be of the same shape (dimension) of the noisy data tensor. e.g., $D \in \mathcal{R}^{100 \times 32 \times 32 \times 3}$ for $32 \times 32$ RGB images with batch size $100$.
 
 
-In the demo, a linear model is provided to demostrate the usage.
+In the demo `purediffusion/model.py`, a linear model is provided to demostrate the usage.
 
 
 
