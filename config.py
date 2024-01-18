@@ -1,4 +1,3 @@
-
 class TrainingConfig:
     diffusion_time_steps = 1000
     train_batch_size = 128
