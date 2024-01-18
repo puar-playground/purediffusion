@@ -20,7 +20,6 @@ my_diffusion = DDPMPipline(num_timesteps=1000, device='cpu', beta_schedule='cosi
 Now, you can use the instance to sample timesteps and add noise to clean data during training. <br />
 Note that a pipline instance is model independent. Meaning: you need to feed model and data dimension to it for generation. For example:
 ```
-from purediffusion.pipline import DDPIPipline
 my_diffusion.ddpm_reverse(model, batch_size, data_shape)
 ```
 The `data_shape` flag is a list of integers represents the dimension of a single output of the model. e.g., for a $32 \times 32$ RGB image generation model, a possible setting could be `data_shape=[32, 32, 3]`.<br />
@@ -28,6 +27,7 @@ The `data_shape` flag is a list of integers represents the dimension of a single
 #### 2.1.2 DDIM
 A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling with specified number of steps: 
 ```
+from purediffusion.pipline import DDPIPipline
 my_diffusion_fast = DDIMPipline(my_diffusion, ddim_num_steps=100)
 ```
 To generate data:
