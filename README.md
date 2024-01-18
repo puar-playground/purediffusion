@@ -22,7 +22,7 @@ Note that a pipline instance is model independent. Meaning: you need to feed mod
 ```
 my_diffusion.ddpm_reverse(model, batch_size, data_shape)
 ```
-The `data_shape` flag is a list of integers represents the dimension of a single output of the model. e.g., for a $32 \times 32$ RGB image generation model, a possible setting could be `data_shape=[32, 32, 3]`.<br />
+The `data_shape` flag is a list of integers represents the dimension of a single output of the model. e.g., for a 32 $\times$ 32 RGB image generation model, a possible setting could be `data_shape=[32, 32, 3]`.<br />
 
 #### 2.1.2 DDIM
 A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling with specified number of steps: 
