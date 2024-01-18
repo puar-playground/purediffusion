@@ -38,7 +38,7 @@ my_diffusion_fast.ddim_reverse(model, batch_size, data_shape)
 ### 2.2 Model
 The neural network instance should take two inputs: 
 1. scalar integer timesteps ($t$)
-2. noisy data tensor. ($D$ \in \mathcal{R}^{\text{batch_size} \times \text{data_shape}}) <br />
+2. noisy data tensor. ($D \in \mathcal{R}^{\text{batch_size} \times \text{data_shape}}$) <br />
 
 Integer timesteps should be converted to time embeddings. <br />
 The model's output should be of the same shape (dimension) of the noisy data tensor.
