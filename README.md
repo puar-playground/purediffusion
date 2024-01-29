@@ -37,7 +37,7 @@ To generate data:
 my_diffusion_fast.ddim_reverse(model, batch_size, data_shape)
 ```
 ### 2.2 Cold diffusion pipelines
-The cold-diffusion pipeline is implementated in `purediffusion/cold.py`
+The cold-diffusion pipeline is implementated in `purediffusion/cold.py`. Run the demo training code: `train_cold.py`
 
 ### 2.3 Model
 The model could take as much input as desired for various conditions. However, it must include the two basic inputs:
