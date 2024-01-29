@@ -6,7 +6,7 @@ import torch.utils.data as data
 from purediffusion.model import LinearDiffusion
 from config import TrainingConfig
 from tqdm import tqdm
-from purediffusion.GaussianPipline import DDIMPipline, DDPMPipline
+from purediffusion.gaussian import DDIMpipline, DDPMpipline
 import time
 
 def train_loop(config, model, ddim_pipeline, optimizer, train_data):
@@ -75,8 +75,8 @@ if __name__ == "__main__":
     y_dim = 5
     train_data = syth_data(50000, y_dim)
     model = LinearDiffusion(n_steps=config.diffusion_time_steps, y_dim=y_dim, feature_dim=512)
-    ddpm_pipeline = DDPMPipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
-    ddim_pipeline = DDIMPipline(ddpm_pipeline, ddim_num_steps=100)
+    ddpm_pipeline = DDPMpipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
+    ddim_pipeline = DDIMpipline(ddpm_pipeline, ddim_num_steps=100)
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 

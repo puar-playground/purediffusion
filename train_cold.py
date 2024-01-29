@@ -6,7 +6,7 @@ import torch.utils.data as data
 from purediffusion.model import LinearDiffusion
 from config import TrainingConfig
 from tqdm import tqdm
-from purediffusion.ColdPipline import ColdPipline
+from purediffusion.cold import Coldpipline
 import time
 
 def glorot_initialize(data_shape):
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     y_dim = 5
     train_data = syth_data(50000, y_dim)
     model = LinearDiffusion(n_steps=config.diffusion_time_steps, y_dim=y_dim, feature_dim=512)
-    cold_pipline = ColdPipline(num_timesteps=100, device='cpu', beta_schedule='cosine')
+    cold_pipline = Coldpipline(num_timesteps=100, device='cpu', beta_schedule='cosine')
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 
