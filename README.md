@@ -29,7 +29,7 @@ The `data_shape` flag is a list of integers represents the dimension of a single
 #### 2.1.2 DDIM
 A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling with specified number of steps: 
 ```
-from purediffusion.gaussian import DDPIpipline
+from purediffusion.gaussian import DDIMpipline
 my_diffusion_fast = DDIMpipline(my_diffusion, ddim_num_steps=100)
 ```
 To generate data:
