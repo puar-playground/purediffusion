@@ -10,7 +10,7 @@ pip install purediffusion
 ## 2. Tutorial
 `purediffusion` provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
 ### 2.1 Pipelines
-The script `purediffusion/pipeline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`.
+The script `purediffusion/GaussianPipline.py` provide two diffusion pipelines: `DDPMPipline` and `DDIMPipline`. The cold-diffusion pipeline is implementated in `purediffusion/ColdPipline.py`
 #### 2.1.1 DDPM
 A DDPMPipline instance prepares all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
 ```
@@ -27,7 +27,7 @@ The `data_shape` flag is a list of integers represents the dimension of a single
 #### 2.1.2 DDIM
 A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling with specified number of steps: 
 ```
-from purediffusion.pipline import DDPIPipline
+from purediffusion.GaussianPipline import DDPIPipline
 my_diffusion_fast = DDIMPipline(my_diffusion, ddim_num_steps=100)
 ```
 To generate data:
