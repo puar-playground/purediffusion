@@ -6,10 +6,17 @@ import torch.utils.data as data
 from purediffusion.model import LinearDiffusion
 from config import TrainingConfig
 from tqdm import tqdm
-from purediffusion.GaussianPipline import DDIMPipline, DDPMPipline
+from purediffusion.ColdPipline import ColdPipline
 import time
 
-def train_loop(config, model, ddim_pipeline, optimizer, train_data):
+def glorot_initialize(data_shape):
+    init_data = torch.zeros(data_shape)
+    gain = torch.nn.init.calculate_gain('relu')
+    torch.nn.init.xavier_normal_(init_data, gain=gain)
+    return init_data
+
+
+def train_loop(config, model, cold_pipline, optimizer, train_data):
 
     train_dataloader = data.DataLoader(train_data, batch_size=config.train_batch_size, shuffle=True, num_workers=4)
 
@@ -28,20 +35,20 @@ def train_loop(config, model, ddim_pipeline, optimizer, train_data):
 
             for step, clean_data in enumerate(train_dataloader):
 
-                # Sample noise to add to the images
-                noise = torch.rand_like(clean_data)
-                bs = clean_data.shape[0]
-
                 # Sample a random timestep for each image
-                timesteps = ddim_pipeline.sample_t(size=(bs,))
+                bs = clean_data.shape[0]
+                timesteps = cold_pipline.sample_t(size=(bs,))
 
                 # Add noise to the clean images according to the noise magnitude at each timestep
                 # (this is the forward diffusion process)
-                noisy_data = ddim_pipeline.add_noise(clean_data, noise, timesteps)
+                data_T = glorot_initialize(clean_data.shape)
+                noisy_data = cold_pipline.interpolate_degrade(clean_data, data_T, timesteps)
 
                 # Predict the noise residual
-                noise_pred = model(noisy_data, timesteps)
-                loss = F.mse_loss(noise_pred, noise)
+                data_pred = model(noisy_data, timesteps)
+                cold_diff_loss = F.mse_loss(data_pred, clean_data)
+                constraint_loss = F.mse_loss(torch.sum(data_pred, dim=-1), torch.ones([bs]))
+                loss = cold_diff_loss + constraint_loss
 
                 # update parameters
                 optimizer.zero_grad()
@@ -53,12 +60,17 @@ def train_loop(config, model, ddim_pipeline, optimizer, train_data):
 
                 # update pbar
                 progress_bar.update(1)
-                logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
+                logs = {"cold_diff": cold_diff_loss.detach().item(), "constraint": constraint_loss.detach().item(),
+                        "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
                 progress_bar.set_postfix(**logs)
                 global_step += 1
 
-
-        generated = ddim_pipeline.ddim_reverse(model, batch_size=2, data_shape=[y_dim])
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        test_data_shape = list(clean_data.shape)
+        test_data_shape[0] = 2
+        data_T_test = glorot_initialize(test_data_shape)
+        generated = cold_pipline.cold_reverse(model, data_T_test)
         print('>' * 150)
         print('generated')
         print(generated)
@@ -66,7 +78,7 @@ def train_loop(config, model, ddim_pipeline, optimizer, train_data):
         print(train_data.center)
         time.sleep(0.1)
         states = model.state_dict()
-        torch.save(states, './checkpoint/test.pt')
+        torch.save(states, './checkpoint/cold_test.pt')
 
 
 if __name__ == "__main__":
@@ -75,11 +87,10 @@ if __name__ == "__main__":
     y_dim = 5
     train_data = syth_data(50000, y_dim)
     model = LinearDiffusion(n_steps=config.diffusion_time_steps, y_dim=y_dim, feature_dim=512)
-    ddpm_pipeline = DDPMPipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
-    ddim_pipeline = DDIMPipline(ddpm_pipeline, ddim_num_steps=100)
+    cold_pipline = ColdPipline(num_timesteps=100, device='cpu', beta_schedule='cosine')
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 
-    train_loop(config, model, ddim_pipeline, optimizer, train_data)
+    train_loop(config, model, cold_pipline, optimizer, train_data)
 
 
