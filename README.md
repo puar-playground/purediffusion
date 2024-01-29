@@ -1,5 +1,8 @@
 # PureDiffusion
-A torch implementation for [DDPM](https://github.com/hojonathanho/diffusion) with [DDIM](https://github.com/ermongroup/ddim) sampling. This implementation is not restricted for Image data.
+A torch implementation for diffusion models: 
+1. [DDPM](https://github.com/hojonathanho/diffusion) with [DDIM](https://github.com/ermongroup/ddim) sampling. 
+2. [Cold-diffusion](https://arxiv.org/abs/2208.09392).
+This implementation is not restricted for Image data.
 
 ## 1. Installation
 `purediffusion` only requires the [`PyTorch`](https://pytorch.org) package. And it is easy to install using [`pip`](https://pypi.org/project/purediffusion/).
