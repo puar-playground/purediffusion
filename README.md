@@ -4,10 +4,11 @@ A torch implementation for diffusion models that is not restricted for Image dat
 2. [Cold-diffusion](https://arxiv.org/abs/2208.09392).
 
 ## 1. Installation
-`purediffusion` only requires the [`PyTorch`](https://pytorch.org) package. And it is easy to install using [`pip`](https://pypi.org/project/purediffusion/).
+`purediffusion` only requires the [`PyTorch`](https://pytorch.org) package. And it is available on [`PyPI`](https://pypi.org/project/purediffusion/).
 ```
 pip install purediffusion
 ```
+However, Cloning this repo simplifies the process of making modifications.
 
 ## 2. Tutorial
 `purediffusion` provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
