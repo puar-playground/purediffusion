@@ -8,7 +8,7 @@ A torch implementation for diffusion models that is not restricted for Image dat
 ```
 pip install purediffusion
 ```
-However, Cloning this repo simplifies the process of making modifications.
+However, cloning this repo simplifies the process of making modifications.
 
 ## 2. Tutorial
 `purediffusion` provide a simple way to train a diffusion model using customized neural network architectures for arbitrary data dimension.
