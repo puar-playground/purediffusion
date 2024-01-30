@@ -15,7 +15,7 @@ However, Cloning this repo simplifies the process of making modifications.
 ### 2.1 Gaussian diffusion pipelines
 The script `purediffusion/gaussian.py` provide two diffusion pipelines: `DDPMpipline` and `DDIMpipline`.
 #### 2.1.1 DDPM
-A DDPMPipline instance prepares all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
+A DDPMpipline instance prepares all parameters ($\alpha$, $\beta$, $\bar{\alpha}$, etc...) in a specified noisy schedule. To initialize a DDPMPipline:
 ```
 from purediffusion.gaussian import DDPMpipline
 my_diffusion = DDPMpipline(num_timesteps=1000, device='cpu', beta_schedule='cosine')
@@ -28,7 +28,7 @@ my_diffusion.ddpm_reverse(model, batch_size, data_shape)
 The `data_shape` flag is a list of integers represents the dimension of a single output of the model. e.g., for a 32 x 32 RGB image generation model, a possible setting could be `data_shape = [32, 32, 3]`.<br />
 
 #### 2.1.2 DDIM
-A `DDPMPipline` instance could be upgraded to a `DDIMPipline` instance for efficient DDIM sampling with specified number of steps: 
+A `DDPMpipline` instance could be upgraded to a `DDIMpipline` instance for efficient DDIM sampling with specified number of steps: 
 ```
 from purediffusion.gaussian import DDIMpipline
 my_diffusion_fast = DDIMpipline(my_diffusion, ddim_num_steps=100)
